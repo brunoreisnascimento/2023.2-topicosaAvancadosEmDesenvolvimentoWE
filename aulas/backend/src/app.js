@@ -1,9 +1,21 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
 const router = express.Router();
-//Rotas
-const index = require('./routes/index');
-const personRoute = require('./routes/personRoute');
-app.use('/', index);
-app.use('/persons', personRoute);
+
+
+const livroRoute = require('./routes/livro');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/livro', livroRoute);
 module.exports = app;
+
+
+router.get('/', (req, res, next) => {
+    res.status(200).send({
+      title: 'MentionsAPI',
+      version: '1.0.0'
+    });
+  });
